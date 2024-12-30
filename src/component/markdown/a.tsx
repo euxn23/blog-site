@@ -14,5 +14,5 @@ export const a: Components['a'] = ({ node, href, className, ...props }) => {
       </div>
     )
   }
-  return <a href={href} className={className} {...props} />
+  return <a href={href} target="_blank" className={className} {...props} />
 }
