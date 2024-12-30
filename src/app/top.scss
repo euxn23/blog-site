@@ -24,4 +24,21 @@
       justify-content: space-between;
     }
   }
+  > .other-works {
+    &.open {
+      width: 260px;
+      display: flex;
+      @media (width < 800px) {
+        display: none;
+      }
+    }
+
+    &.accordion {
+      display: none;
+      @media (width < 800px) {
+        width: 100%;
+        display: flex;
+      }
+    }
+  }
 }

@@ -35,6 +35,16 @@
         border: 1px solid var(--card-hover);
       }
     }
+
+    > .other-works {
+      &.open {
+        width: 260px;
+        display: flex;
+        @media (width < 1280px) {
+          width: 100%;
+        }
+      }
+    }
   }
   @media (width < 1280px) {
     > .header {

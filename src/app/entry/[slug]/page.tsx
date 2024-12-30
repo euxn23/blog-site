@@ -1,7 +1,7 @@
 import data from '@/src/prebuilt.json'
 import { notFound } from 'next/navigation'
 import './entry.scss'
-import { OtherWorks } from '@/src/component/other-works/other-works'
+import { OtherWorks, OtherWorksOpen } from '@/src/component/other-works/other-works'
 import { format, parse } from 'date-fns'
 import { Metadata } from 'next'
 import { injectPageToMetadata } from '@/src/helper/inject-page-to-metadata'
@@ -43,7 +43,7 @@ export default function Entry({ params }: Props) {
             <Markdown content={entry.content} />
           </div>
         </main>
-        <OtherWorks />
+        <OtherWorksOpen />
       </div>
     </div>
   )

@@ -4,28 +4,28 @@ import * as Accordion from '@radix-ui/react-accordion'
 import data from '@/src/prebuilt.json'
 import { OtherWork } from '@/src/component/other-work/other-work'
 import { ChevronDownIcon } from '@radix-ui/react-icons'
-import { useCallback, useEffect, useState } from 'react'
 import './other-works.scss'
+import { Fragment } from 'react'
 
-function OtherWorksDesktop() {
+export function OtherWorksOpen() {
   return (
-    <div className="other-works">
+    <div className="other-works open">
       <div className="title">Other Works</div>
       <div className="entries">
         {data.otherWorks.map((entry, index) => (
-          <>
+          <Fragment key={entry.url}>
             {index !== 0 && <hr className="line" />}
-            <OtherWork {...entry} key={entry.url} />
-          </>
+            <OtherWork {...entry} />
+          </Fragment>
         ))}
       </div>
     </div>
   )
 }
 
-function OtherWorksMobile() {
+export function OtherWorksAccordion() {
   return (
-    <Accordion.Root className="other-works" type="single" collapsible asChild>
+    <Accordion.Root className="other-works accordion" type="single" collapsible asChild>
       <Accordion.Item value="other-works">
         <Accordion.Trigger className="title">
           Other Works
@@ -33,10 +33,10 @@ function OtherWorksMobile() {
         </Accordion.Trigger>
         <Accordion.Content className="entries">
           {data.otherWorks.map((entry, index) => (
-            <>
+            <Fragment key={entry.url}>
               {index !== 0 && <hr className="line"/>}
-              <OtherWork {...entry} key={entry.url} />
-            </>
+              <OtherWork {...entry} />
+            </Fragment>
           ))}
         </Accordion.Content>
       </Accordion.Item>
@@ -45,18 +45,10 @@ function OtherWorksMobile() {
 }
 
 export function OtherWorks() {
-  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' && window.innerWidth < 800)
-  const handleResize = useCallback(() => {
-    if (window.innerWidth < 800) {
-      setIsMobile(true)
-    } else {
-      setIsMobile(false)
-    }
-  }, [setIsMobile])
-  useEffect(() => {
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [handleResize])
-
-  return isMobile ? <OtherWorksMobile /> : <OtherWorksDesktop />
+  return (
+    <>
+      <OtherWorksAccordion />
+      <OtherWorksOpen />
+    </>
+  )
 }
